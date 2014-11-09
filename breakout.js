@@ -3,7 +3,7 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: p
 
 function preload() {
 
-    game.load.atlas('breakout', 'assets/games/breakout/breakout.png', 'assets/games/breakout/breakout.json');
+    game.load.atlas('breakout', 'assets/games/breakout/breakout-v2.png', 'assets/games/breakout/breakout-v2.json');
     game.load.image('starfield', 'assets/misc/starfield.jpg');
 
 }
@@ -38,11 +38,11 @@ function create() {
 
     var brick;
 
-    for (var y = 0; y < 4; y++)
+    for (var y = 0; y < 2; y++)
     {
         for (var x = 0; x < 15; x++)
         {
-            brick = bricks.create(120 + (x * 36), 100 + (y * 52), 'breakout', 'brick_' + (y+1) + '_1.png');
+            brick = bricks.create(120 + (x * 36), 300 + (y * 52), 'breakout', 'brick_' + (y+(x%2)+1) + '_1.png');
             brick.body.bounce.set(1);
             brick.body.immovable = true;
         }
@@ -66,7 +66,8 @@ function create() {
     ball.body.collideWorldBounds = true;
     ball.body.bounce.set(1);
 
-    ball.animations.add('spin', [ 'ball_1.png', 'ball_2.png', 'ball_3.png', 'ball_4.png', 'ball_5.png' ], 50, true, false);
+    ball.animations.add('spin', [ 'ball_1.png', 'ball_4.png' ], 50, true, false);
+    // ball.animations.add('spin', [ 'ball_2.png', 'ball_5.png' ], 50, true, false);
 
     ball.events.onOutOfBounds.add(ballLost, this);
 
@@ -93,16 +94,18 @@ function update () {
     //  Fun, but a little sea-sick inducing :) Uncomment if you like!
     // s.tilePosition.x += (game.input.speed.x / 2);
 
-    paddle.body.x = game.input.x;
+    // paddle.body.x = game.input.x;
 
-    if (paddle.x < 24)
-    {
-        paddle.x = 24;
-    }
-    else if (paddle.x > game.width - 24)
-    {
-        paddle.x = game.width - 24;
-    }
+    // if (paddle.x < 24)
+    // {
+    //     paddle.x = 24;
+    // }
+    // else if (paddle.x > game.width - 24)
+    // {
+    //     paddle.x = game.width - 24;
+    // }
+
+    bricks.x = game.input.x / 3 - 120;
 
     if (ballOnPaddle)
     {
