@@ -38,11 +38,11 @@ function create() {
 
     var brick;
 
-    for (var y = 0; y < 4; y++)
+    for (var y = 0; y < 2; y++)
     {
         for (var x = 0; x < 15; x++)
         {
-            brick = bricks.create(120 + (x * 36), 100 + (y * 52), 'breakout', 'brick_' + (y+1) + '_1.png');
+            brick = bricks.create(120 + (x * 36), 300 + (y * 52), 'breakout', 'brick_' + (y+(x%2)+1) + '_1.png');
             brick.body.bounce.set(1);
             brick.body.immovable = true;
         }
@@ -84,16 +84,18 @@ function update () {
     //  Fun, but a little sea-sick inducing :) Uncomment if you like!
     // s.tilePosition.x += (game.input.speed.x / 2);
 
-    paddle.body.x = game.input.x;
+    // paddle.body.x = game.input.x;
 
-    if (paddle.x < 24)
-    {
-        paddle.x = 24;
-    }
-    else if (paddle.x > game.width - 24)
-    {
-        paddle.x = game.width - 24;
-    }
+    // if (paddle.x < 24)
+    // {
+    //     paddle.x = 24;
+    // }
+    // else if (paddle.x > game.width - 24)
+    // {
+    //     paddle.x = game.width - 24;
+    // }
+
+    bricks.x = game.input.x / 3 - 120;
 
     if (ballOnPaddle)
     {
