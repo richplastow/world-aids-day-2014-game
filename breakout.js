@@ -3,7 +3,7 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: p
 
 function preload() {
 
-    game.load.atlas('breakout', 'assets/games/breakout/breakout.png', 'assets/games/breakout/breakout.json');
+    game.load.atlas('breakout', 'assets/games/breakout/breakout-v2.png', 'assets/games/breakout/breakout-v2.json');
     game.load.image('starfield', 'assets/misc/starfield.jpg');
 
 }
@@ -66,7 +66,8 @@ function create() {
     ball.body.collideWorldBounds = true;
     ball.body.bounce.set(1);
 
-    ball.animations.add('spin', [ 'ball_1.png', 'ball_2.png', 'ball_3.png', 'ball_4.png', 'ball_5.png' ], 50, true, false);
+    ball.animations.add('spin', [ 'ball_1.png', 'ball_4.png' ], 50, true, false);
+    // ball.animations.add('spin', [ 'ball_2.png', 'ball_5.png' ], 50, true, false);
 
     ball.events.onOutOfBounds.add(ballLost, this);
 
