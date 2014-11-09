@@ -9,6 +9,7 @@ function preload() {
 }
 
 var ball;
+var balls;
 var paddle;
 var bricks;
 
@@ -23,12 +24,11 @@ var introText;
 
 var s;
 
+var ballCount = 0;
+
 function create() {
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
-
-    //  We check bounds collisions against all walls other than the bottom one
-    game.physics.arcade.checkCollision.down = false;
 
     s = game.add.tileSprite(0, 0, 800, 600, 'starfield');
 
@@ -77,7 +77,16 @@ function create() {
 
     game.input.onDown.add(releaseBall, this);
 
+    balls = game.add.group();
+    balls.enableBody = true;
+    balls.physicsBodyType = Phaser.Physics.ARCADE;
+
+    // this.ballTimer = this.game.time.create(false); // adds a timer to the game
+    // this.ballTimer.start();
+
 }
+
+// function 
 
 function update () {
 
@@ -103,6 +112,27 @@ function update () {
     {
         game.physics.arcade.collide(ball, paddle, ballHitPaddle, null, this);
         game.physics.arcade.collide(ball, bricks, ballHitBrick, null, this);
+    }
+    game.physics.arcade.collide(balls, bricks, ballHitBrick, null, this);
+
+
+    if(game.rnd.integerInRange(0,100) == 50)
+    {
+        document.title = ballCount;
+        ballCount++;
+
+        var newBall = balls.create(game.rnd.integerInRange(0, game.world.width), 0, 'breakout', 'ball_1.png'); // = game.add.sprite(20, 20, 'breakout', 'ball_1.png');
+        newBall.anchor.set(0.5);
+        newBall.checkWorldBounds = true;
+
+        game.physics.enable(newBall, Phaser.Physics.ARCADE);
+
+        newBall.body.collideWorldBounds = true;
+        newBall.body.bounce.set(1);
+
+        newBall.body.velocity.y = game.rnd.integerInRange(50,200);
+        newBall.body.velocity.x = game.rnd.integerInRange(-200,200);
+
     }
 
 }
@@ -150,8 +180,15 @@ function gameOver () {
 }
 
 function ballHitBrick (_ball, _brick) {
+    
+    console.log(_brick)
+    
+    if (false /* brick.color == ball.color */)
+    {
+        _brick.kill();
 
-    _brick.kill();
+        _ball.kill();
+    }
 
     score += 10;
 
