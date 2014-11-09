@@ -10,3 +10,4 @@ Releases
 + 0.0.1-1 with git flow installed
 + 0.1.0   initial release
 + 0.2.0   second release
++ 0.3.0   breakout game from phaser examples
