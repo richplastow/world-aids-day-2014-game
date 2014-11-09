@@ -16,7 +16,7 @@ a{color:#fff; text-decoration: none;}
 a:hover{text-decoration: underline;}
 
 .helvetica{font-family: Arial, Tahoma, Verdana !important;}
-.header{background: #e0e4f1 url('../../_site/images/header-bg2.jpg') no-repeat; width:100%; margin:0; padding:0; background-size: cover; height: 530px; display: block; clear:both; margin-bottom: -400px}
+.header{background: #e0e4f1 no-repeat; width:100%; margin:0; padding:0; height: 530px; display: block; clear:both; margin-bottom: -400px}
 .main-container{display: block; clear:both; width: 1125px; height: auto; margin:0 auto;}
 
 ul.nav-links{ margin:0; padding:0; display: inline-block; float: right; list-style-type: none; color: #fff; font-size: 15px; line-height: 2em; margin-top: 50px; min-width: 180px;}
